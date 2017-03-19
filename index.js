@@ -13,6 +13,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 var sessionIDs = [];
 
+let UserModel;
+let EventModel;
+
 function connectToMongo() {
     mongoose.connect('mongodb://localhost/eventwhere');
     var UserSchema = mongoose.Schema({
@@ -25,7 +28,7 @@ function connectToMongo() {
         salt: String,
         iterations: Number
     });
-    var UserModel = mongoose.model('Userv1', UserSchema);
+    UserModel = mongoose.model('Userv1', UserSchema);
 
     var EventSchema = mongoose.Schema({
         name: String,
@@ -39,7 +42,7 @@ function connectToMongo() {
         location: String,
         host: Number 
     });
-    var EventModel = mongoose.model("Eventv1", EventSchema);
+    EventModel = mongoose.model("Eventv1", EventSchema);
 }
 function hashPassword(password) {
     var salt = crypto.randomBytes(128).toString('base64');
